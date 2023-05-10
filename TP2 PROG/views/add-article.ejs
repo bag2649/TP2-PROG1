@@ -6,7 +6,7 @@
     </header>
 
     <main>
-        <% let article = {title: '', desc: '', url: '', tag: ''} %>
+        <% let article = {title: '', desc: '', url: '', tags: ''} %>
         <form action="/add-article" method="POST" class="was-validated">
             <% if (errorMessage) { %>
                 <div class="errors alert alert-danger">
@@ -40,10 +40,10 @@
                 <% } %>
             </div>
             <div class="form-group">
-                <label for="tag">Tag</label>
-                <input type="text" name="tag" class="form-control <%= errorMessage && errorMessage.tag ? 'is-invalid' : '' %>" value="<%= article.tag ? article.tag : '' %>">
-                <% if (errorMessage && errorMessage.tag) { %>
-                    <div class="invalid-feedback"><%= errorMessage.tag.message %></div>
+                <label for="tags">Tag</label>
+                <input type="text" name="tags" class="form-control <%= errorMessage && errorMessage.tags ? 'is-invalid' : '' %>" value="<%= article.tags ? article.tags : '' %>">
+                <% if (errorMessage && errorMessage.tags) { %>
+                    <div class="invalid-feedback"><%= errorMessage.tags.message %></div>
                 <% } %>
             </div>
 
@@ -57,13 +57,13 @@
     const titleInput = document.querySelector('input[name=title]');
     const contentInput = document.querySelector('textarea[name=content]');
     const urlInput = document.querySelector('input[name=url]');
-    const tagInput = document.querySelector('input[name=tag]');
+    const tagsInput = document.querySelector('input[name=tags]');
 
     // Récupérer les valeurs saisies par l'utilisateur
     const titleValue = localStorage.getItem('titleValue');
     const contentValue = localStorage.getItem('contentValue');
     const urlValue = localStorage.getItem('urlValue');
-    const tagValue = localStorage.getItem('tagValue');
+    const tagsValue = localStorage.getItem('tagsValue');
 
     // Réinjecter les valeurs saisies par l'utilisateur
     if (titleValue) {
@@ -75,8 +75,8 @@
     if (urlValue) {
         urlInput.value = urlValue;
     }
-    if (tagValue) {
-        tagInput.value = tagValue;
+    if (tagsValue) {
+        tagsInput.value = tagsValue;
     }
 
     // Sauvegarder les valeurs saisies par l'utilisateur lorsqu'il quitte la page
@@ -84,6 +84,6 @@
         localStorage.setItem('titleValue', titleInput.value);
         localStorage.setItem('contentValue', contentInput.value);
         localStorage.setItem('urlValue', urlInput.value);
-        localStorage.setItem('tagValue', tagInput.value);
+        localStorage.setItem('tagsValue', tagsInput.value);
     });
 </script>

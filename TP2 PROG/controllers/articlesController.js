@@ -46,13 +46,13 @@ exports.getAddArticle = (req, res, next) => {
 };
 
 exports.createArticle = (req, res, next) => {
-  const { title, content, url, tag } = req.body
-  let tags = tag.split(" ");
+  const { title, content, url, tags } = req.body
+  let tag = tags.split(" ");
   const article = new Article({
     title: title,
     content: content,
     url: url,
-    tag: tags,
+    tags: tag,
 
   });
 
@@ -87,14 +87,14 @@ exports.getEditArticle = (req, res, next) => {
 
 
 exports.updateArticle = (req, res, next) => {
-  const { articleId, title, content, url, tag } = req.body
-  let tags = tag.split(" ");
+  const { articleId, title, content, url, tags } = req.body
+  let tag = tags.split(" ");
   Article.findById(articleId)
   .then(article => {
     article.title = title;
     article.content = content;
     article.url = url;
-    article.tag = tags;
+    article.tags = tag;
     return article.save()
   })
   .then( result => {
@@ -109,7 +109,7 @@ exports.updateArticle = (req, res, next) => {
         title: title,
         content: content,
         url: url,
-        tag: tags,
+        tags: tag,
       }
     })
   })

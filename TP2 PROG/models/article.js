@@ -15,7 +15,7 @@ const articleSchema = new Schema(
       type: String,
       
     },
-    tag: {
+    tags: {
       type: [String],
       default:[]
 
