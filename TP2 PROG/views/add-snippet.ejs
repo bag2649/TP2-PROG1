@@ -1,0 +1,90 @@
+<%- include('includes/head.ejs') %>
+
+<body>
+    <header>
+        <%- include('includes/navigation.ejs') %>
+    </header>
+
+    <main>
+        <% let snippet = {title: '', desc: '', url: '', tags: ''} %>
+        <form action="/add-snippet" method="POST" class="was-validated">
+            <% if (errorMessage) { %>
+                <div class="errors alert alert-danger">
+                    Veuillez corriger les erreurs.
+                </div>
+            <% } %>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input 
+                    type="text" 
+                    name="title" 
+                    class="form-control <%= errorMessage && errorMessage.title ? 'is-invalid' : '' %>"
+                    value="<%= snippet.title ? snippet.title : '' %>"
+                >
+                <% if (errorMessage && errorMessage.title) { %>
+                    <div class="invalid-feedback"><%= errorMessage.title.message %></div>
+                <% } %>
+            </div>
+            <div class="form-group">
+                <label for="content">Content</label>
+                <textarea name="content" id="" cols="30" rows="10" class="form-control <%= errorMessage && errorMessage.desc ? 'is-invalid' : '' %>"><%= snippet.content ? snippet.content : '' %></textarea>
+                <% if (errorMessage && errorMessage.content) { %>
+                    <div class="invalid-feedback"><%= errorMessage.content.message %></div>
+                <% } %>
+            </div>
+            <div class="form-group">
+                <label for="url">URL</label>
+                <input type="text" name="url" class="form-control <%= errorMessage && errorMessage.url ? 'is-invalid' : '' %>" value="<%= snippet.url ? snippet.url : '' %>">
+                <% if (errorMessage && errorMessage.url) { %>
+                    <div class="invalid-feedback"><%= errorMessage.url.message %></div>
+                <% } %>
+            </div>
+            <div class="form-group">
+                <label for="tags">Tags</label>
+                <input type="text" name="tags" class="form-control <%= errorMessage && errorMessage.tags ? 'is-invalid' : '' %>" value="<%= snippet.tags ? snippet.tags : '' %>">
+                <% if (errorMessage && errorMessage.tags) { %>
+                    <div class="invalid-feedback"><%= errorMessage.tags.message %></div>
+                <% } %>
+            </div>
+
+            <button type="submit">Ajouter</button>
+        </form>
+    </main>
+
+<%- include('includes/end.ejs') %>
+
+
+<script>
+    const titleInput = document.querySelector('input[name=title]');
+    const contentInput = document.querySelector('textarea[name=content]');
+    const urlInput = document.querySelector('input[name=url]');
+    const tagsInput = document.querySelector('input[name=tags]');
+
+    // Récupérer les valeurs saisies par l'utilisateur
+    const titleValue = localStorage.getItem('titleValue');
+    const contentValue = localStorage.getItem('contentValue');
+    const urlValue = localStorage.getItem('urlValue');
+    const tagsValue = localStorage.getItem('tagsValue');
+
+    // Réinjecter les valeurs saisies par l'utilisateur
+    if (titleValue) {
+        titleInput.value = titleValue;
+    }
+    if (contentValue) {
+        contentInput.value = contentValue;
+    }
+    if (urlValue) {
+        urlInput.value = urlValue;
+    }
+    if (tagsValue) {
+        tagsInput.value = tagsValue;
+    }
+
+    // Sauvegarder les valeurs saisies par l'utilisateur lorsqu'il quitte la page
+    window.addEventListener('beforeunload', () => {
+        localStorage.setItem('titleValue', titleInput.value);
+        localStorage.setItem('contentValue', contentInput.value);
+        localStorage.setItem('urlValue', urlInput.value);
+        localStorage.setItem('tagsValue', tagsInput.value);
+    });
+</script>

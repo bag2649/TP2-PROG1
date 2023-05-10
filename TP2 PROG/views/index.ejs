@@ -1,5 +1,4 @@
 <%- include('includes/head.ejs') %>
-
 <body>
     <header>
         <%- include('includes/navigation.ejs') %>
@@ -8,30 +7,33 @@
     <main>
         <h1>Mes Snippets</h1>
         
-        <% if (articles.length > 0) { %>
+        <% if (snippets.length > 0) { %>
             <div class="grid">
-                <% for (let article of articles) { %>
-                    <article class="card post-item">
+                <% for (let snippet of snippets) { %>
+                    <snippet class="card post-item">
                         <div class="card-body">
-                            <% if (article.url) { %>
-                                <h1 class="post__title"><a href="<%= article.url %>" target="_blank"><%= article.title %></a></h1>
+                            <% if (snippet.url) { %>
+                                <h1 class="post__title"><a href="<%= snippet.url %>" target="_blank"><%= snippet.title %></a></h1>
                             <% } else { %>
-                                <h1 class="post__title"><%= article.title %></h1>
+                                <h1 class="post__title"><%= snippet.title %></h1>
                             <% } %>
                         </div>
                     <div>
-                        <%= article.tags %>
+                        <%= snippet.tags %>
+                    </div>
+                    <div>                       
+                        <%= new Date(snippet.createdAt).toLocaleDateString() %> <%= new Date(snippet.createdAt).toLocaleTimeString() %>                        
                     </div>
                     <div class="card__actions">
-                        <a href="/article/<%= article.id %>" class="btn">See</a>
-                        <a href="/edit-article/<%= article.id %>" class="btn">Edit</a>
-                        <a href="/delete/<%= article.id %>" class="btn btn-delete">Delete</a>
+                        <a href="/snippet/<%= snippet.id %>" class="btn">See</a>
+                        <a href="/edit-snippet/<%= snippet.id %>" class="btn">Edit</a>
+                        <a href="/delete/<%= snippet.id %>" class="btn btn-delete">Delete</a>
                     </div>
-                </article>
+                </snippet>
             <% } %>
         </div>
         <% } else { %>
-        <h3>Pas d'article !</h3>
+        <h3>Pas de snippet !</h3>
         <% } %>
     </main>
 
@@ -41,7 +43,7 @@
         deleteButtons.forEach(button => {
             button.addEventListener('click', event => {
                 event.preventDefault();
-                const confirmation = confirm("Are you sure you want to delete this article?");
+                const confirmation = confirm("Are you sure you want to delete this snippet?");
                 if (confirmation) {
                     window.location.href = button.getAttribute('href');
                 }
