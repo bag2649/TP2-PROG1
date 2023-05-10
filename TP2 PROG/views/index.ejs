@@ -1,0 +1,52 @@
+<%- include('includes/head.ejs') %>
+
+<body>
+    <header>
+        <%- include('includes/navigation.ejs') %>
+    </header>
+
+    <main>
+        <h1>Mes Snippets</h1>
+        
+        <% if (articles.length > 0) { %>
+            <div class="grid">
+                <% for (let article of articles) { %>
+                    <article class="card post-item">
+                        <div class="card-body">
+                            <% if (article.url) { %>
+                                <h1 class="post__title"><a href="<%= article.url %>" target="_blank"><%= article.title %></a></h1>
+                            <% } else { %>
+                                <h1 class="post__title"><%= article.title %></h1>
+                            <% } %>
+                        </div>
+                    <div>
+                        <%= article.tag %>
+                    </div>
+                    <div class="card__actions">
+                        <a href="/article/<%= article.id %>" class="btn">See</a>
+                        <a href="/edit-article/<%= article.id %>" class="btn">Edit</a>
+                        <a href="/delete/<%= article.id %>" class="btn btn-delete">Delete</a>
+                    </div>
+                </article>
+            <% } %>
+        </div>
+        <% } else { %>
+        <h3>Pas d'article !</h3>
+        <% } %>
+    </main>
+
+    <script>
+        const deleteButtons = document.querySelectorAll('.btn-delete');
+    
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', event => {
+                event.preventDefault();
+                const confirmation = confirm("Are you sure you want to delete this article?");
+                if (confirmation) {
+                    window.location.href = button.getAttribute('href');
+                }
+            });
+        });
+    </script>
+    
+<%- include('includes/end.ejs') %>

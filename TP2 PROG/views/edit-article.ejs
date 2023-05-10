@@ -1,0 +1,49 @@
+<%- include('includes/head.ejs') %>
+
+
+<body>
+    <header>
+        <%- include('includes/navigation.ejs') %>
+    </header>
+
+    <main>
+        <form action="/edit-article" method="POST" class="was-validated">
+            <% if (errorMessage) { %>
+                <div class="errors alert alert-danger">
+                    Veuillez corriger les erreurs.
+                </div>
+            <% } %>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input 
+                    type="text" 
+                    name="title" 
+                    value="<%= article.title  %>" 
+                    class="form-control is-invalid"
+                >
+                <% if (errorMessage && errorMessage.title) { %>
+                    <div class="invalid-feedback"><%= errorMessage.title.message %></div>
+                <% } %>
+            </div>
+            <div class="form-group">
+                <label for="content">Content</label>
+                <textarea name="content" id="" cols="30" rows="10" class="form-control is-invalid"><%= article.desc %></textarea>
+            </div>
+            <div class="form-group">
+                <label for="url">URL</label>
+                <input type="text" name="url" value="<%= article.url %>" class="form-control is-invalid">
+            </div>
+            <div class="form-group">
+                <label for="tag">Tag</label>
+                <input type="text" name="tag" value="<%= article.tag %>" class="form-control is-invalid">
+            </div>
+
+            <input type="hidden" name="articleId" value="<%= article._id %>">
+
+            <button type="submit">Éditer</button>
+        </form>
+    </main>
+
+    
+<%- include('includes/end.ejs') %>
+
