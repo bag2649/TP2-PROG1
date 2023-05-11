@@ -1,2 +1,4 @@
 //est-ce que ma methode de sauvegarder local puis réinjecter pour sauvegarder les champs du formulaires est ok ?
 //route delete snippet : pourquoi utilisé une route ?
+//est-ce qu'on peut mettre du css directement dans les .ejs
+//double edit -> lorsque j'edit un snippet, celui si rempli de , les espaces entre les tags et lorsque qu'on applique les changement

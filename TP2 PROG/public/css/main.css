@@ -18,7 +18,7 @@ main {
 .main-header {
   width: 100%;
   height: 3.5rem;
-  background-color: #006900;
+  background-color: #2421bd;
   padding: 0 1.5rem;
 }
 
@@ -53,13 +53,22 @@ main {
 
 .grid {
   display: flex;
-  justify-content: initial;
   align-items: stretch;
   flex-direction: initial;
+  margin: 0 auto;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .card {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  max-width: 20%;
 }
 
 .card__header,
@@ -92,9 +101,11 @@ main {
 
 .btn {
   padding: 0.5rem 0.2rem;
+  margin: 0.5em;
+  min-width: 70px;
   font: inherit;
-  border: 1px solid #006900;
-  color: #006900;
+  border: 1px solid #414141;
+  color: #000000;
   background: white;
   border-radius: 3px;
   cursor: pointer;
@@ -102,9 +113,37 @@ main {
 
 .btn:hover,
 .btn:active {
-  background-color: #006900;
+  background-color: #414141;
   color: white;
   transition: all 0.5s ease-out;
+}
+
+.titre {
+  color: white;
+  text-align: center;
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+
+.tags {
+  display:flex;
+  justify-content: center;
+  border-radius: 30%;
+  
+}
+
+.see {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tag {
+  border-radius: 10%;
+  margin: 0.5em;
+  padding: 1em;
+  background-color: #086AB3;
 }
 
 /* Formulaire */
@@ -134,8 +173,13 @@ textarea {
   margin-bottom: 20px;
 }
 
+.was-validated .form-control:valid {
+  border-color: #086AB3;
+}
+
+
 button[type="submit"] {
-  background-color: #4CAF50;
+  background-color: #086AB3;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -145,7 +189,7 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background-color: #3e8e41;
+  background-color: #2421bd;
 }
 
 
@@ -159,6 +203,8 @@ button[type="submit"]:hover {
   width: 20rem;
   max-width: 95%;
   margin: 1em;
+  width: calc(20% - 16px);
+  margin-bottom: 16px; 
 }
 
 .post__title {
@@ -200,5 +246,12 @@ button[type="submit"]:hover {
 }
 
 .form-control input:focus {
-  outline-color: #00695c;
+  outline-color: #961414;
+}
+
+body {
+  background-image: url(../images/backgroundimage2.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }

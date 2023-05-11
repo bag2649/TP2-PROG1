@@ -68,7 +68,7 @@ exports.getAddSnippet = (req, res, next) => {
 
 exports.createSnippet = (req, res, next) => {
   const { title, content, url, tags } = req.body
-  let tag = tags.split(" ");
+  let tag = tags.split(",");
   const snippet = new Snippet({
     title: title,
     content: content,
@@ -91,13 +91,32 @@ exports.createSnippet = (req, res, next) => {
 
 }
 
-exports.getEditSnippet = (req, res, next) => {
+/*exports.getEditSnippet = (req, res, next) => {
   const snippetId = req.params.snippetId;
   Snippet.findById(snippetId)
     .then(snippet =>{
       res.render('edit-snippet', {
         pageTitle: "Modifier l'snippet",
         snippet: snippet,
+        errorMessage: null
+      })
+    })
+    .catch(err => {
+      console.log('err', err)
+    })
+} */
+
+exports.getEditSnippet = (req, res, next) => {
+  const snippetId = req.params.snippetId;
+  Snippet.findById(snippetId)
+    .then(snippet =>{
+      // Convertir les tags en une chaîne séparée par des virgules
+      const tags = snippet.tags.join(",");
+      
+      res.render('edit-snippet', {
+        pageTitle: "Modifier l'snippet",
+        snippet: snippet,
+        tags: tags, // ajouter les tags mis à jour à l'objet rendu
         errorMessage: null
       })
     })

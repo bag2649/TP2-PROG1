@@ -1,13 +1,40 @@
 <%- include('includes/head.ejs') %>
 
-<body>
-    <header>
-        <%- include('includes/navigation.ejs') %>
-    </header>
+    <body>
+        <header>
+            <%- include('includes/navigation.ejs') %>
+        </header>
 
-    <main>
-        <h1><%= snippet.title %></h1>
-        <snippet class="grid ">          
-        </snippet>
-    </main>
-<%- include('includes/end.ejs') %>
+        <main class="see">
+            <h1 class="display-4 titre">
+                <%= snippet.title %>
+            </h1>
+
+
+            <div class="card mb-3" style="max-width: 80%; margin: 0 auto;"">
+                <div class="card-body">
+                  <% if (snippet.url) { %>
+                    <h5 class="card-title"><a href="<%= snippet.url %>" target="_blank" class="card-link"><%= snippet.title %></a></h5>
+                  <% } else { %>
+                    <h5 class="card-title"><%= snippet.title %></h5>
+                  <% } %>
+                  <p class="card-text"><%= snippet.content %></p>
+                </div>
+                <div class="card-footer">
+                  <% for (let tag of snippet.tags) { %>
+                    <span class="badge badge-primary mr-1"><%= tag %></span>
+                  <% } %>
+                  <p class="card-text">
+                    <small class="text-muted">
+                      Date of creation: <%= new Date(snippet.createdAt).getFullYear() %>/<%= ("0" + (new Date(snippet.createdAt).getMonth()+1)).slice(-2) %>/
+                      <%= ("0" + new Date(snippet.createdAt).getDate()).slice(-2) %> at <%= ("0" + new Date(snippet.createdAt).getHours()).slice(-2) %>:<%= ("0" + new Date(snippet.createdAt).getMinutes()).slice(-2) %>
+                    </small>
+                  </p>
+                </div>
+              </div>
+              <button class="btn btn-primary" onclick="window.location.href = '/'">Retourner à la page d'accueil</button>
+              
+        </main>
+
+        <%- include('includes/end.ejs') %>
+    </body>

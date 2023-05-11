@@ -5,7 +5,7 @@
     </header>
 
     <main>
-        <h1>Mes Snippets</h1>
+        <h1 class="display-4 titre">My Snippets</h1>
         <div class="tags">
             <% const allTags = new Set(); %>
             <% for (let snippet of snippets) { %>
@@ -14,7 +14,7 @@
                 <% } %>
             <% } %>
             <% for (let tag of allTags) { %>
-                <a href="/tag/<%= tag %>"><button class="badge badge-secondary"><%= tag %></button></a>
+                <a href="/tag/<%= tag %>"><button class="btn"><%= tag %></button></a>
             <% } %>
         </div>
         
@@ -30,17 +30,20 @@
                                 <h1 class="post__title"><%= snippet.title %></h1>
                             <% } %>
                         </div>
-                        <div>
-                            <% for (let tag of snippet.tags) { %>
-                                <span class="badge badge-secondary"><%= tag %></span>
-                            <% } %>
+                            <div >
+                                <p class="center">Tags:</p>
+                                    <div class="center">
+                                        <% for (let tag of snippet.tags) { %>
+                                            <span class="badge badge-primary tag"><%= tag %></span>
+                                        <% } %>
+                                    </div>
+                        </div>                  
+                        <div class="center">                       
+                            Date of creation:<br>
+                             <%= new Date(snippet.createdAt).getFullYear() %>/<%= ("0" + (new Date(snippet.createdAt).getMonth()+1)).slice(-2) %>/
+                            <%= ("0" + new Date(snippet.createdAt).getDate()).slice(-2) %> at <%= ("0" + new Date(snippet.createdAt).getHours()).slice(-2) %>:<%= ("0" + new Date(snippet.createdAt).getMinutes()).slice(-2) %>
                         </div>
-                    <div>
-                        <%= snippet.tags %>
-                    </div>
-                    <div>                       
-                        <%= new Date(snippet.createdAt).toLocaleDateString() %> <%= new Date(snippet.createdAt).toLocaleTimeString() %>                        
-                    </div>
+                        
                     <div class="card__actions">
                         <a href="/snippet/<%= snippet.id %>" class="btn">See</a>
                         <a href="/edit-snippet/<%= snippet.id %>" class="btn">Edit</a>
