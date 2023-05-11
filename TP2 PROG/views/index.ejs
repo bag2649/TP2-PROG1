@@ -6,6 +6,18 @@
 
     <main>
         <h1>Mes Snippets</h1>
+        <div class="tags">
+            <% const allTags = new Set(); %>
+            <% for (let snippet of snippets) { %>
+                <% for (let tag of snippet.tags) { %>
+                    <% allTags.add(tag); %>
+                <% } %>
+            <% } %>
+            <% for (let tag of allTags) { %>
+                <a href="/tag/<%= tag %>"><button class="badge badge-secondary"><%= tag %></button></a>
+            <% } %>
+        </div>
+        
         
         <% if (snippets.length > 0) { %>
             <div class="grid">
@@ -16,6 +28,11 @@
                                 <h1 class="post__title"><a href="<%= snippet.url %>" target="_blank"><%= snippet.title %></a></h1>
                             <% } else { %>
                                 <h1 class="post__title"><%= snippet.title %></h1>
+                            <% } %>
+                        </div>
+                        <div>
+                            <% for (let tag of snippet.tags) { %>
+                                <span class="badge badge-secondary"><%= tag %></span>
                             <% } %>
                         </div>
                     <div>

@@ -3,6 +3,25 @@
 // Récupère le modèle Snippet
 const Snippet = require('../models/snippet');
 
+exports.getSnippetsByTag = (req, res, next) => {
+  const tag = req.params.tag;
+  Snippet.find({ tags: tag })
+    .sort({ createdAt: -1 })
+    .then(snippets => {
+      res.render('index', {
+        snippets: snippets,
+        pageTitle: `Snippets avec le tag ${tag}`
+      });
+    })
+    .catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
+};
+
+
 
 // Utilise la méthode find() afin de récupérer tous les snippets
 // Retourne un Promesse
